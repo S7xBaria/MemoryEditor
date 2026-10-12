@@ -38,7 +38,6 @@ object MemoryEngine {
                 val name = if (parts.size > 5) parts.subList(5, parts.size).joinToString(" ") else ""
                 result.add(MemoryMap(start, end, perms, name))
             } catch (e: Exception) {
-                // skip
             }
         }
         return result
