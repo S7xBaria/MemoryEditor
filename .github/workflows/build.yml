@@ -17,13 +17,20 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: true # <-- قبول التراخيص تلقائياً
+          log-accepted-android-sdk-licenses: false
+
+      - name: Install Android SDK components
+        run: |
+          sdkmanager "platforms;android-34" "build-tools;34.0.0" "cmake;3.22.1" "ndk;25.2.9519653" # <-- تثبيت المكونات المطلوبة
+          
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.7'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+          gradle-version: '8.7' # <-- إصدار Gradle المطلوب لـ AGP 8.5.0
 
       - name: Build Debug APK
         run: gradle assembleDebug --no-daemon --stacktrace
