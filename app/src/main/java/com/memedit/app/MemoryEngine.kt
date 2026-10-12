@@ -1,8 +1,5 @@
 package com.memedit.app
 
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
-
 object MemoryEngine {
 
     init {
@@ -30,8 +27,7 @@ object MemoryEngine {
         val raw = nativeGetMaps(pid) ?: return emptyList()
         val result = mutableListOf<MemoryMap>()
         for (line in raw) {
-            val parts = line.trim().split(" ")
-                .filter { it.isNotEmpty() }
+            val parts = line.trim().split(" ").filter { it.isNotEmpty() }
             if (parts.size < 2) continue
             val rangeParts = parts[0].split("-")
             if (rangeParts.size != 2) continue
